@@ -5,6 +5,13 @@
     <UserSecretsId>aspnet-InteractiveCV-1A6A4E67-E843-4D6C-B99B-B54B09CC9501</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="wwwroot\images\unused\**" />
+    <Content Remove="wwwroot\images\unused\**" />
+    <EmbeddedResource Remove="wwwroot\images\unused\**" />
+    <None Remove="wwwroot\images\unused\**" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="MailKit" Version="1.20.0" />
