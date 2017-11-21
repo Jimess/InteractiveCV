@@ -90,3 +90,18 @@ textarea {
 .skillboxRound {
     border-radius: 6px;
 }
+
+@media only screen and (max-width: 768px) {
+    .skillBox {
+        line-height: 60px;
+    }
+
+    .skillBoxInner {
+        width: 60px;
+        height: 60px;
+        display: inline-block;
+        vertical-align: middle;
+        text-align: center;
+        font-size: 14px
+    }
+}
