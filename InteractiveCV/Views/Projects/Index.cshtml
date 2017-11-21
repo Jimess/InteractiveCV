@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewData["Title"] = "Projects";
+}
+@model IEnumerable<Project>
+
+
+<h2>Projects</h2>
+<div class="alert-info">
+    <p>TODO: Editing, adding and removing projects for logged in users.</p>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th> @Html.DisplayNameFor(model => model.Title) </th>
+            <th> @Html.DisplayNameFor(model => model.isActive) </th>
+            <th> @Html.DisplayNameFor(model => model.Color) </th>
+            <th> @Html.DisplayNameFor(model => model.Status) </th>
+            <th> Link </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var proj in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(p => proj.Title)</td>
+                <td>@Html.DisplayFor(p => proj.isActive)</td>
+                <td>@Html.DisplayFor(p => proj.Color)</td>
+                <td>@Html.DisplayFor(p => proj.Status)</td>
+                <td>
+                    @if (proj.isActive)
+                    {
+                        <a class="btn btn-default" asp-controller="Projects" asp-action="ViewProject" asp-route-id="@proj.ID">GO</a>
+                    } else
+                    {
+                        <a class="btn disabled btn-default">Not Active</a>
+                    }
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

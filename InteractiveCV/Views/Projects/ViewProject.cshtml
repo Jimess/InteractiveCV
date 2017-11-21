@@ -1,0 +1,88 @@
+﻿@{
+    ViewData["Title"] = "ViewProject";
+}
+@model Project
+@inject SignInManager<ApplicationUser> SignInManager
+
+<div class="projectheader">
+    <div class="media">
+        <div class="media-left">
+            <img img-thumbnail" src=@Model.imageUrl style="height:100px;" />
+        </div>  
+        <div class="media-body" style="vertical-align:middle;">
+            <h3 class="media-heading">@Html.DisplayFor(model => model.Title)</h3>
+        </div>
+    </div>
+</div>
+<!--Description-->
+<div class="jumbotron">
+    <div class="media">
+        <div class="media-body">
+            <h2 class="media-heading">Description</h2>
+            <p>
+                @Html.DisplayFor(p => p.Description)
+                @if (SignInManager.IsSignedIn(User))
+                {
+                <a asp-action="EditDescription" asp-route-id="@Model.ID" >Edit Description</a>
+                }
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="jumbotron">
+    <div class="media">
+        <div class="media-body">
+            <h2 class="media-heading">Goals</h2>
+
+            @foreach (var goal in Model.goals)
+            {
+                <p>
+                    <span class="glyphicon glyphicon-expand"></span>
+                    @Html.DisplayFor(text => goal.goalText)
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <a asp-action="EditGoal" asp-route-id="@Model.ID" asp-route-projectGoalID="@goal.projectGoalID">Edit Goal</a>
+                        <a asp-action="DeleteGoal" asp-route-id="@Model.ID" asp-route-projectGoalID="@goal.projectGoalID">Delete Goal</a>
+                    }
+                </p>
+
+            }
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <a asp-action="CreateGoal" asp-route-id="@Model.ID">Create Goal</a>
+            }
+            
+            
+        </div>
+    </div>
+</div>
+
+@for (int i = 1; i <= Model.updates.Max(m => m.updateNumber); i++)
+{
+    <div class="well" style="background-color: #428bca;">
+        <div class="media">
+            <div class="media-body">
+                <h3 class="media-heading">Update @Html.Raw(i)</h3>
+                @foreach (var log in Model.updates.Where(l => l.updateNumber == i))
+                {
+                    <p>
+                        @Html.DisplayFor(d => log.updateText)
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <a asp-action="EditUpdateEntry" asp-route-id="@Model.ID" asp-route-projectUpdateID="@log.projectUpdateID" asp-route-updateNumber="@i">Edit Entry</a>
+                            <a asp-action="DeleteUpdateEntry" asp-route-id="@Model.ID" asp-route-projectUpdateID="@log.projectUpdateID">Delete Entry</a>
+                        }
+                        
+                    </p>
+
+                }
+            </div>
+        </div>
+       @if (SignInManager.IsSignedIn(User))
+       {
+        <a asp-action="CreateUpdate" asp-route-id="@Model.ID" asp-route-updID="@i">Create Update</a>
+       }
+        
+    </div>
+}

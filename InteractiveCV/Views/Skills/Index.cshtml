@@ -1,0 +1,100 @@
+﻿@model IEnumerable<InteractiveCV.Models.Skills>
+
+@{
+    ViewData["Title"] = "Skills";
+}
+
+@inject SignInManager<ApplicationUser> SignInManager
+
+<h2>Skills</h2>
+
+<form asp-controller="Skills" asp-action="Index" method="get" class="form-inline">
+    <div class="input-group">
+
+        <span class="input-group-btn">
+            <input type="text" class="form-control" placeholder="Search Name" name="searchString" />
+            <button class="btn btn-warning form-group" type="submit" value="filter">
+                <i class="glyphicon glyphicon-search"></i>
+            </button>
+            <button class="btn btn-default" value="reset" asp-controller="Skills" asp-action="Index">
+                Reset
+            </button>
+        </span>
+    </div>
+</form>
+
+@if (SignInManager.IsSignedIn(User))
+{
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+}
+
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Experience)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RelatedExperience)
+            </th>
+            <th>Links</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    ~@Html.DisplayFor(modelItem => item.Experience) years
+                </td>
+                <td>
+                    @Html.Display("Currently None")
+                    @if (item.RelatedExperience == null)
+                    {
+                        @Html.Raw("Currently None")
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(modelItem => item.RelatedExperience)
+                    }
+                </td>
+                <td>
+                    @if (item.Links.Count == 0)
+                    {
+                        @Html.Raw("No Links")
+                    }
+                    else
+                    {
+                        foreach (var link in item.Links)
+                        {
+                            <a class="btn btn-default" asp-controller="Projects" asp-action="ViewProject" asp-route-id="@link.projectNum">@Html.DisplayFor(l => link.Text)</a>
+                        }
+                    }
+                </td>
+                @if (SignInManager.IsSignedIn(User))
+                {
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ID">Delete</a> |
+                    <a asp-action="AddLink" asp-route-skillsID="@item.ID">AddLink</a> 
+                </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="alert alert-warning">
+    <p>Currently none means that examples exist but have not yet been prepared for public audience. Working on the website everyday to make it better. Links are added afterwards as well.</p>
+</div>

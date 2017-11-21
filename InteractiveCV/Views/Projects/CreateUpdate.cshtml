@@ -1,0 +1,34 @@
+﻿@model ProjectUpdate
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+<h2>Create Goal for </h2>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreateUpdate">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="updateText" class="control-label"></label>
+                <input asp-for="updateText" class="form-control" />
+                <span asp-validation-for="updateText" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="projectID" class="control-label"></label>
+                <input asp-for="projectID" class="form-control" value="@ViewData["ProjectID"]" readonly="readonly" />
+                <span asp-validation-for="projectID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="updateNumber" class="control-label"></label>
+                <input asp-for="updateNumber" class="form-control" value="@ViewData["UpdateID"]" readonly="readonly" />
+                <span asp-validation-for="updateNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="CreateUpdate" class="btn btn-default" />
+            </div>
+        </form>
+    </div>  
+</div>
+<div>
+    <a asp-action="ViewProject" asp-route-id="@ViewData["ProjectID"]">Back to List</a>
+</div>

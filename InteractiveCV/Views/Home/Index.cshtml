@@ -1,0 +1,364 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@inject SignInManager<ApplicationUser> SignInManager
+@model IEnumerable<Project>
+
+@* @if ((bool)ViewData["isPopup"] && ViewData["IsPopup"] != null)
+{
+<div class="jumbotron" style="position:absolute;z-index:1; margin-top: 100px; width:100%; height:100%;">
+    <h4>I see you're visiting for the first time.</h4>
+    <a id="popup" class="btn btn-danger" asp-action="PopupClick"> Continue as a Guest</a>
+    <a id="popup" class="btn btn-danger" asp-action="SendNotification"> Notify Me</a>
+</div>
+} Email Sender not yet imlemented *@
+<!--Main carousel-->
+<div id="homeCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
+    <ol class="carousel-indicators">
+        <li data-target="#homeCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#homeCarousel" data-slide-to="1"></li>
+    </ol>
+
+    <div class="carousel-inner">
+        <div class="item active">
+            <div class="slide1"></div>
+            <div class="carousel-caption" style="left:0; right:0;">
+                <h1>Online CV</h1>
+                <h2>by Laurynas Pupšta</h2>
+                <h4>made possible with</h4>
+                <div class="skillBox">
+                    <div class="skillBoxInner skillboxRound bg-primary">.NET Core</div>
+                    <div class="skillBoxInner skillboxRound bg-primary">ASP.NET</div>
+                    <div class="skillBoxInner skillboxRound bg-primary">HTML</div>
+                    <div class="skillBoxInner skillboxRound bg-primary">CSS</div>
+                    <div class="skillBoxInner skillboxRound bg-primary">MySQL</div>
+                    <div class="skillBoxInner skillboxRound bg-primary">Bootstrap</div>
+                    <div class="skillBoxInner skillboxRound bg-primary">C#</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="item">
+            <div class="slide2"></div>
+            <div class="carousel-caption" style="right:40%;">
+                <h1>“The function of good software is to make the complex appear to be simple.”</h1>
+                <p>- Grady Booch</p>
+            </div>
+        </div>
+    </div>
+
+    <a class="left carousel-control" href="#homeCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+    <a class="right carousel-control" href="#homeCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+</div>
+
+<!-- About Section -->
+<div class="jumbotron" style="margin-bottom:0px;">
+    <h2>About Me</h2>
+    <p>
+        A motivated, sociable and fast-learning IT graduate. Eager and prepared to apply the knowledge and prove
+        the skills developed during the computer science studies and additional programming projects in professional practice as well. Willing and eager to learn
+        from experts and peers, curious, ready to help others, initiative, enthusiastic and reliable in any tasks entrusted.
+    </p>
+</div>
+<!--Skills column-->
+<div class="row" style="margin-left:0px; margin-right:0px;">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding: 0px;">
+        <button type="button" class="btn btn-default btn-lg" typeof="button" data-toggle="collapse" data-target="#skillsmenu" style="width:100%; height:80px;">See Top Skills</button>
+
+        <div id="skillsmenu" class="collapse">
+            <!-- of dropdown-->
+            <div class="jumbotron skillBox">
+                <div class="skillBoxInner bg-primary">
+                    Java
+                </div>
+                <div class="skillBoxInner bg-primary">
+                    MySQL
+                </div>
+                <div class="skillBoxInner bg-primary">
+                    Unity
+                </div>
+                <div class="skillBoxInner bg-primary">
+                    C#
+                </div>
+                <div class="skillBoxInner bg-primary">
+                    Python
+                </div>
+                <div class="skillBoxInner bg-primary">
+                    Bootstrap
+                </div>
+                <div class="skillBoxInner bg-primary">
+                    CSS
+                </div>
+                <div class="skillBoxInner bg-primary">
+                    HTML
+                </div>
+                <div class="skillBoxInner bg-primary">
+                    .NET Core
+                </div>
+                <a class="btn btn-default" asp-controller="Skills" asp-action="Index" style="width:100%; height: 70px; margin-top:10px; vertical-align:middle; line-height:55px;">more details</a>
+            </div>
+        </div>
+    </div>
+
+    <!--Current Projects column-->
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding:0px;">
+        <button type="button" class="btn btn-default btn-lg" typeof="button" data-toggle="collapse" data-target="#projectMenu" style="width:100%; height:80px;">See Current Projects</button>
+
+        <div id="projectMenu" class="collapse">
+            <!-- color indications for the project types-->
+            <div class="row" style="margin: 15px 0 15px 0px;">
+                <div class="col-lg-4 col-md-3 col-sm-6 col-xs-12" style="line-height:35px;">
+                    <div class="colorsquare inline pull-left bg-primary"></div>
+                    <p class="pull-left" style="margin:0;">&ensp; IT projects</p>
+                </div>
+                <div class="col-lg-4 col-md-3 col-sm-6 col-xs-12" style="line-height:35px;">
+                    <div class="colorsquare inline pull-left bg-danger"></div>
+                    <p class="pull-left" style="margin:0;">&ensp; Game Dev projects</p>
+                </div>
+                <div class="col-lg-4 col-md-3 col-sm-6 col-xs-12" style="line-height:35px;">
+                    <div class="colorsquare inline pull-left bg-success"></div>
+                    <p class="pull-left" style="margin:0;">&ensp; Other projects</p>
+                </div>
+            </div>
+
+            <!--Projects-->
+            <div class="panel-group">
+                
+                @foreach (var proj in Model)
+                {
+                    <div class="panel panel-@proj.Color">
+                        <div class="panel-heading"><h4>@Html.DisplayFor(p => proj.Title)</h4></div>
+                        <div class="panel-body">
+                            <img class="img-thumbnail pull-left" src="@proj.imageUrl" style="width:150px; margin-right:15px; margin-bottom: 10px;" />
+                            <p>@Html.DisplayFor(p => proj.Description)</p>
+                            @if (proj.isActive || SignInManager.IsSignedIn(User))
+                            {
+                                <a asp-area="" asp-controller="Projects" asp-action="ViewProject" asp-route-id="@proj.ID" class="btn btn-@proj.Color pull-right">more details</a>
+                            }
+                            else
+                            {
+                                <a asp-area="" asp-controller="Projects" asp-action="ViewProject" asp-route-id="@proj.ID" class="btn btn-@proj.Color pull-right disabled">Coming soon</a>
+                            }
+                        </div>
+                        <div class="panel-footer">
+                            <h4>@Html.DisplayFor(p => proj.Status)</h4>
+                        </div>
+                    </div>
+                }
+                    </div>
+            </div>
+        </div>
+   </div>
+
+    <!--Hobbies Column-->
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding:0px;">
+        <button type="button" class="btn btn-default btn-lg" typeof="button" data-toggle="collapse" data-target="#hobbiesMenu" style="width:100%; height:80px;">See Hobbies</button>
+
+        <div id="hobbiesMenu" class="collapse">
+            <div class="alert alert-warning">
+                Images are covered by CC0 licence.
+            </div>
+            <div class="row" style="padding-bottom:15px;">
+                <div class="media col-lg-6" style="margin-top:15px;">
+                    <div class="media-left"> <img src="~/images/ibanez.jpg" class="media-object img-thumbnail" style="width:200px;" /> </div>
+                    <div class="media-body" style="text-align:left; vertical-align:middle;">
+                        <h4 class="media-heading"> Electric Guitar </h4>
+                        <p> I enjoy rock, so decided to learn how to play the guitar. After a while, I could not help myself not to get an electric guitar.</p>
+                    </div>
+                </div>
+                <div class="media col-lg-6">
+                    <div class="media-left"> <img src="~/images/mtb.png" class="media-object img-thumbnail" style="width:200px;" /> </div>
+                    <div class="media-body" style="text-align:left; vertical-align:middle;">
+                        <h4 class="media-heading"> MTB Riding </h4>
+                        <p> Started riding when I was a little boy. This hobbie continued and evolved into something a little bit more extreme.</p>
+                    </div>
+                </div>
+                <div class="media col-lg-6">
+                    <div class="media-left"> <img src="~/images/tech.jpg" class="media-object img-thumbnail" style="width:200px;" /> </div>
+                    <div class="media-body" style="text-align:left; vertical-align:middle;">
+                        <h4 class="media-heading"> Tech Enthusiast </h4>
+                        <p> Every day starts with a new topic about tech. Each day could introduce an innovation that might change the world tomorrow.</p>
+                    </div>
+                </div>
+                <div class="media col-lg-6">
+                    <div class="media-left"> <img src="~/images/diy.png" class="media-object img-thumbnail" style="width:200px;" /> </div>
+                    <div class="media-body" style="text-align:left; vertical-align:middle;">
+                        <h4 class="media-heading"> DIY </h4>
+                        <p> When you have the right amount of space and the right tools but no money to spare. </p>
+                    </div>
+                </div>
+                <div class="media col-lg-6">
+                    <div class="media-left"> <img src="~/images/gamedev.png" class="media-object img-thumbnail" style="width:200px;" /> </div>
+                    <div class="media-body" style="text-align:left; vertical-align:middle;">
+                        <h4 class="media-heading"> Game Development </h4>
+                        <p> One of my strongest passions. Games are the future of everything.</p>
+                    </div>
+                </div>
+                <div class="media col-lg-6">
+                    <div class="media-left"> <img src="~/images/coding.png" class="media-object img-thumbnail" style="width:200px;" /> </div>
+                    <div class="media-body" style="text-align:left; vertical-align:middle;">
+                        <h4 class="media-heading"> Coding </h4>
+                        <p> Second strongest passion and my everyday problem solver. Enjoy automating daily
+                            tasks to save time later on. Even though it takes more time to create it than you'd spend using it in your whole life.
+                        </p>
+                    </div>
+                </div>
+                <div class="media col-lg-6">
+                    <div class="media-left"> <img src="~/images/lanparty.jpeg" class="media-object img-thumbnail" style="width:200px;" /> </div>
+                    <div class="media-body" style="text-align:left; vertical-align:middle;">
+                        <h4 class="media-heading"> LAN Parties </h4>
+                        <p> Once in a while, friends do need to meet. Even if it's for some gaming!</p>
+                    </div>
+                </div>
+                <div class="media col-lg-6">
+                    <div class="media-left"> <img src="~/images/gaming.png" class="media-object img-thumbnail" style="width:200px;" /> </div>
+                    <div class="media-body" style="text-align:left; vertical-align:middle;">
+                        <h4 class="media-heading"> Gaming </h4>
+                        <p> Born gamer.</p>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <!--Education Column-->
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding:0px;">
+        <button type="button" class="btn btn-default btn-lg" typeof="button" data-toggle="collapse" data-target="#educationMenu" style="width:100%; height:80px;">See Education</button>
+
+        <div id="educationMenu" class="collapse">
+            <div class="alert alert-warning">
+                Descriptions are still being updated!
+            </div>
+            <div class="jumbotron">
+                <h5>2014-2017 - University of Essex</h5>
+                <h3>BSc Computer Games <a data-toggle="collapse" data-target="#eduModules" style="font-size:12px; vertical-align:middle; cursor:pointer;">modules &#x25BC </a></h3>
+
+                <div id="eduModules" class="row collapse">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 bg-primary">
+                        <h4>1st year</h4>
+                    </div>
+                    <!-- 1year modules-->
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 bg-success" style="height: 100px;">
+                        <p data-toggle="tooltop" title="Product development in teams." style="cursor:pointer; text-align:center; vertical-align:middle; margin:0; line-height: 100px;">
+                            Professional Development
+                        </p>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 bg-success" style="height: 100px;">
+                        <p data-toggle="tooltop" title="Programming logic and Maths in programming" style="cursor:pointer; text-align:center; vertical-align:middle; margin:0; line-height: 100px;">
+                            Mathematics for Computing
+                        </p>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 bg-success" style="height: 100px;">
+                        <p data-toggle="tooltop" title="Python programming introduction" style="cursor:pointer; text-align:center; vertical-align:middle; margin:0; line-height: 100px;">
+                            Introduction to Programming
+                        </p>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 bg-success" style="height: 100px;">
+                        <p data-toggle="tooltop" title="Java programming and introduction to OO design priciples" style="cursor:pointer; text-align:center; vertical-align:middle; margin:0; line-height: 100px;">
+                            Object-Oriented Programming
+                        </p>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 bg-success" style="height: 100px;">
+                        <p data-toggle="tooltop" title="Introduction to relational databases and implemmentation with MySQL" style="cursor:pointer; text-align:center; vertical-align:middle; margin:0; line-height: 100px;">
+                            Introduction to Databases
+                        </p>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 bg-success" style="height: 100px;">
+                        <p data-toggle="tooltop" title="Introduction to HTML, CSS and JSP" style="cursor:pointer; text-align:center; vertical-align:middle; margin:0; line-height: 100px;">
+                            Web Development
+                        </p>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 bg-success" style="height: 100px;">
+                        <p data-toggle="tooltop" title="Introduction to network systems and their management. Cisco certificate gained but expired a year after." style="cursor:pointer; text-align:center; vertical-align:middle; margin:0; line-height: 100px;">
+                            Network Fundamentals
+                        </p>
+                    </div>
+                    <!-- 2nd year modules-->
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 bg-primary">
+                        <h4>2nd year</h4>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 bg-success" style="height: 100px;">
+                        <p data-toggle="tooltop" title="Product development in teams based on real world problems" style="cursor:pointer; text-align:center; vertical-align:middle; margin:0; line-height: 100px;">
+                            Group Project and Industrial Practice
+                        </p>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 bg-success" style="height: 100px;">
+                        <p data-toggle="tooltop" title="Software designs and code testing principles using Java" style="cursor:pointer; text-align:center; vertical-align:middle; margin:0; line-height: 100px;">
+                            Software Engineering
+                        </p>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 bg-success" style="height: 100px;">
+                        <p data-toggle="tooltop" title="Application development using Java to create an app with a GUI. The app was a Tetris Game." style="cursor:pointer; text-align:center; vertical-align:middle; margin:0; line-height: 100px;">
+                            Application Programming
+                        </p>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 bg-success" style="height: 100px;">
+                        <p data-toggle="tooltop" title="Learning data types and principles. Java implementation of different data structures (stacks, priority list, etc.) and algorithms (quicksorts and etc.)" style="cursor:pointer; text-align:center; vertical-align:middle; margin:0; line-height: 100px;">
+                            Data Structures and Algorithms
+                        </p>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 bg-success" style="height: 100px;">
+                        <p data-toggle="tooltop" title="Introduction to AI and assignments based on AI research and problem solving using Java with different methods." style="cursor:pointer; text-align:center; vertical-align:middle; margin:0; line-height: 100px;">
+                            Artificial Intelligence
+                        </p>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 bg-success" style="height: 100px;">
+                        <p data-toggle="tooltop" title="Introduction to Game Design by Richard Bartle (Mud)" style="cursor:pointer; text-align:center; vertical-align:middle; margin:0; line-height: 100px;">
+                            Computer Game Design
+                        </p>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 bg-success" style="height: 100px;">
+                        <p data-toggle="tooltop" title="Recreation of the game Asteroids with improvements using Java" style="cursor:pointer; text-align:center; vertical-align:middle; margin:0; line-height: 100px;">
+                            Computer Game Programming
+                        </p>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 bg-success" style="height: 100px;">
+                        <p data-toggle="tooltop" title="C++ programming" style="cursor:pointer; text-align:center; vertical-align:middle; margin:0; line-height: 100px;">
+                            C++ Programming
+                        </p>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 bg-primary">
+                        <h4>3rd year</h4>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 bg-success" style="height: 100px;">
+                        <p data-toggle="tooltop" title="Whole year project with supervision by lecturers to assure quality. My final year project was creating a game with C# and Unity Game Engine" style="cursor:pointer; text-align:center; vertical-align:middle; margin:0; line-height: 100px;">
+                            Individual Project
+                        </p>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 bg-success" style="height: 100px;">
+                        <p data-toggle="tooltop" title="Java Programming (threading, asyncronous tasks, concurrency solving)" style="cursor:pointer; text-align:center; vertical-align:middle; margin:0; line-height: 100px;">
+                            Advanced Programming
+                        </p>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 bg-success" style="height: 100px;">
+                        <p data-toggle="tooltop" title="Creating a search engine pipeline for IR using elastic search and python" style="cursor:pointer; text-align:center; vertical-align:middle; margin:0; line-height: 100px;">
+                            Information Retrieval
+                        </p>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 bg-success" style="height: 100px;">
+                        <p data-toggle="tooltop" title="Advanced material on MMORPGS, their design principles and methods by Richard Bartle" style="cursor:pointer; text-align:center; vertical-align:middle; margin:0; line-height: 100px;">
+                            Virtual Worlds
+                        </p>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 bg-success" style="height: 100px;">
+                        <p data-toggle="tooltop" title="3D game development using C# and Unity" style="cursor:pointer; text-align:center; vertical-align:middle; margin:0; line-height: 100px;">
+                            High-Level Games Development
+                        </p>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 bg-success" style="height: 100px;">
+                        <p data-toggle="tooltop" title="Understanding and implementing of intelligent agents" style="cursor:pointer; text-align:center; vertical-align:middle; margin:0; line-height: 100px;">
+                            Intelligent Agents
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+

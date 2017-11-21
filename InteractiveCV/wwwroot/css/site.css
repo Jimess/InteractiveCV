@@ -1,0 +1,92 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    font-family: Arial;
+}
+
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+   padding-left: 0;
+   padding-right: 0;
+   width: 100%; /*Fixing carousel not fitting the whole page*/
+}
+
+/* Set widths on the form inputs since otherwise they're 100% wide */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/* Carousel */
+.carousel-caption p {
+    font-size: 20px;
+    line-height: 1.4;
+}
+
+/* buttons and links extension to use brackets: [ click me ] */
+.btn-bracketed::before {
+    display: inline-block;
+    content: "[";
+    padding-right: 0.5em;
+}
+
+.btn-bracketed::after {
+    display: inline-block;
+    content: "]";
+    padding-left: 0.5em;
+}
+
+.slide1 {
+    background-image: url(../images/carouselbg1.jpeg);
+    height: 500px;
+    background-repeat: no-repeat;
+    background-position: center;
+    min-width: 300px;
+}
+
+.slide2 {
+    background-image: url(../images/myPhoto1new.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 500px;
+    min-width: 300px;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.colorsquare {
+    width: 36px;
+    height: 36px;
+}
+
+.inline {
+    display: inline-block;
+}
+.projectheader {
+    margin: 15px 0 15px 15px;
+}
+
+.glyphicon {
+    vertical-align: text-top;
+}
+
+.skillBox {
+    line-height: 120px;
+}
+
+.skillBoxInner {
+    width: 120px;
+    height: 120px;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 20px;
+}
+
+.skillboxRound {
+    border-radius: 6px;
+}

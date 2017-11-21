@@ -1,0 +1,36 @@
+﻿@model ProjectGoal
+<h2>Edit</h2>
+<h4>Skills</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditGoal">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="projectGoalID" />
+            <div class="form-group">
+                <label asp-for="goalText" class="control-label"></label>
+                <input asp-for="goalText" class="form-control" />
+                <span asp-validation-for="goalText" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="projectID" class="control-label"></label>
+                <input asp-for="projectID" class="form-control" value="@Model.projectID" readonly="readonly"/>
+                <span asp-validation-for="projectID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="projectGoalID" class="control-label"></label>
+                <input asp-for="projectGoalID" class="form-control" value="@Model.projectGoalID" readonly="readonly"/>
+                <span asp-validation-for="projectGoalID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+<div>
+    <a asp-action="ViewProject" asp-route-id="@Model.projectID">Back to List</a>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

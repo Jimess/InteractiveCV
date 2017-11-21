@@ -1,0 +1,41 @@
+﻿@model ProjectUpdate
+<h2>Edit</h2>
+<h4>Skills</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditUpdateEntry">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="projectUpdateID" />
+            <div class="form-group">
+                <label asp-for="updateText" class="control-label"></label>
+                <textarea asp-for="updateText" class="form-control" style="min-width:800px;"></textarea>
+                <span asp-validation-for="updateText" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="projectID" class="control-label"></label>
+                <input asp-for="projectID" class="form-control" value="@Model.projectID" readonly="readonly" />
+                <span asp-validation-for="projectID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="projectUpdateID" class="control-label"></label>
+                <input asp-for="projectUpdateID" class="form-control" value="@Model.projectUpdateID" readonly="readonly" />
+                <span asp-validation-for="projectUpdateID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="updateNumber" class="control-label"></label>
+                <input asp-for="updateNumber" class="form-control" value="@Model.updateNumber"/>
+                <span asp-validation-for="updateNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+<div>
+    <a asp-action="ViewProject" asp-route-id="@Model.projectID">Back to List</a>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

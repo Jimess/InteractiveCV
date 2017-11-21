@@ -1,0 +1,45 @@
+﻿@model Project
+<h2>Edit</h2>
+<h4>Description</h4>
+<hr />
+<div class="row">
+<div class="col-md-4">
+    <form asp-action="EditDescription">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="ID" />
+        <input type="hidden" asp-for="Title" />
+        <input type="hidden" asp-for="imageUrl" />
+        <div class="form-group">
+            <label asp-for="Description" class="control-label"></label>
+            <textarea asp-for="Description" rows="20" class="form-control" style="max-width:1000px;" ></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="isActive" class="control-label"></label>
+            <input asp-for="isActive" class="form-control" />
+            <span asp-validation-for="isActive" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Color" class="control-label"></label>
+            <label>Colours</label>
+            <label>IT - primary, GameDev - danger, Other - success</label>
+            <input asp-for="Color" class="form-control" />
+            <span asp-validation-for="Color" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Status" class="control-label"></label>
+            <input asp-for="Status" class="form-control" />
+            <span asp-validation-for="Status" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Save" class="btn btn-default" />
+        </div>
+    </form>
+</div>
+</div>
+<div>
+    <a asp-action="ViewProject" asp-route-id="@Model.ID">Back to List</a>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

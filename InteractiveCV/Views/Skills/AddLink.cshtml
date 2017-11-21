@@ -1,0 +1,71 @@
+﻿@model SkillLink
+@{
+    ViewData["Title"] = "Add Link";
+}
+<h2>Add Link</h2>
+<h4>Skills</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddLink">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="skillsID" class="control-label"></label>
+                <input asp-for="skillsID" class="form-control" value="@ViewData["SkillsID"]" readonly />
+                <span asp-validation-for="skillsID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="projectNum" class="control-label"></label>
+                <input asp-for="projectNum" class="form-control"/>
+                <span asp-validation-for="projectNum" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Text" class="control-label"></label>
+                <input asp-for="Text" class="form-control"/>
+                <span asp-validation-for="Text" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="AddLink" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Project ID
+            </th>
+            <th>
+                Project Title
+            </th>
+            <th>
+                Project Status
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in ViewBag.Projects)
+        {
+            <tr>
+                <td>
+                    @item.ID
+                </td>
+                <td>
+                    @item.Title
+                </td>
+                <td>
+                    @item.isActive
+                </td>
+            </tr>
+
+        }
+    </tbody>
+</table>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
