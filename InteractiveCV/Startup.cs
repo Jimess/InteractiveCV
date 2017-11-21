@@ -83,22 +83,22 @@ namespace InteractiveCV
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, ApplicationDbContext context)
         {
-            app.UseDeveloperExceptionPage();
-            app.UseBrowserLink();
-            app.UseDatabaseErrorPage();
+            //app.UseDeveloperExceptionPage();
+            //app.UseBrowserLink();
+            //app.UseDatabaseErrorPage();
 
             if (env.IsDevelopment())
             {
-                //app.UseDeveloperExceptionPage();
-                //app.UseBrowserLink();
-                //app.UseDatabaseErrorPage();
-                int i = 0;
+                app.UseDeveloperExceptionPage();
+                app.UseBrowserLink();
+                app.UseDatabaseErrorPage();
             }
             else
             {
                 app.UseExceptionHandler("/Home/Error");
             }
-
+            
+            //not currently used
             loggerFactory.AddConsole(Configuration.GetSection("Logging")).AddDebug();
 
             app.UseStaticFiles();
