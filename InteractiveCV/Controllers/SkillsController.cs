@@ -171,7 +171,7 @@ namespace InteractiveCV.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddLink([Bind("SkillLinkID, skillsID, Text, projectNum")] SkillLink skillsLink)
+        public async Task<IActionResult> AddLink([Bind("SkillLinkID, skillsID, Text, projectNum, isExternal, externalLink")] SkillLink skillsLink)
         {
             if (ModelState.IsValid)
             {

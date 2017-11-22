@@ -15,14 +15,24 @@
                 <span asp-validation-for="skillsID" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="projectNum" class="control-label"></label>
-                <input asp-for="projectNum" class="form-control"/>
-                <span asp-validation-for="projectNum" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="Text" class="control-label"></label>
                 <input asp-for="Text" class="form-control"/>
                 <span asp-validation-for="Text" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="isExternal" class="control-label"></label>
+                <input id="linkControl" asp-for="isExternal" class="form-control" />
+                <span asp-validation-for="isExternal" class="text-danger"></span>
+            </div>
+            <div class="form-group intLink">
+                <label asp-for="projectNum" class="control-label"></label>
+                <input asp-for="projectNum" class="form-control" />
+                <span asp-validation-for="projectNum" class="text-danger"></span>
+            </div>
+            <div class="form-group extLink">
+                <label asp-for="externalLink" class="control-label"></label>
+                <input asp-for="externalLink" class="form-control" />
+                <span asp-validation-for="externalLink" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="AddLink" class="btn btn-default" />

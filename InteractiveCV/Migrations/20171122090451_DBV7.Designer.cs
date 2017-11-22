@@ -11,9 +11,10 @@ using System;
 namespace InteractiveCV.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171122090451_DBV7")]
+    partial class DBV7
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -140,7 +141,7 @@ namespace InteractiveCV.Migrations
 
                     b.Property<bool>("isExternal");
 
-                    b.Property<int?>("projectNum");
+                    b.Property<int>("projectNum");
 
                     b.Property<int>("skillsID");
 

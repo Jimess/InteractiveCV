@@ -78,7 +78,14 @@
                     {
                         foreach (var link in item.Links)
                         {
-                            <a class="btn btn-default" asp-controller="Projects" asp-action="ViewProject" asp-route-id="@link.projectNum">@Html.DisplayFor(l => link.Text)</a>
+                            if (!link.isExternal)
+                            {
+                                <a class="btn btn-default" asp-controller="Projects" asp-action="ViewProject" asp-route-id="@link.projectNum">@Html.DisplayFor(l => link.Text)</a>
+                            }
+                            else
+                            {
+                                <a class="btn btn-default" href="@link.externalLink">@Html.DisplayFor(l => link.Text)</a>
+                            }
                         }
                     }
                 </td>
