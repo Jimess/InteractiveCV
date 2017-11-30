@@ -6,7 +6,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="CreateUpdate">
+        <form asp-action="CreateUpdateEntry">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="updateText" class="control-label"></label>
@@ -20,11 +20,11 @@
             </div>
             <div class="form-group">
                 <label asp-for="updateNumber" class="control-label"></label>
-                <input asp-for="updateNumber" class="form-control" value="@ViewData["UpdateID"]" readonly="readonly" />
+                <input asp-for="updateNumber" class="form-control" value="@ViewData["UpdateNumber"]" readonly="readonly" />
                 <span asp-validation-for="updateNumber" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="CreateUpdate" class="btn btn-default" />
+                <input type="submit" value="CreateUpdateEntry" class="btn btn-default" />
             </div>
         </form>
     </div>  

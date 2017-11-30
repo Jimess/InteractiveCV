@@ -157,10 +157,14 @@ namespace InteractiveCV.Controllers
 
 
         //don't need async here
+        // GET: Skills/AddLink/5/
+        // controller/action/skillID
+        // adds a link to a specific link
+        [HttpGet("[controller]/[action]/{skillsID}")]
         public async Task<IActionResult> AddLink(int skillsID)
         {
 
-            //ViewBag
+            //ViewBag to be able to use multiple models
             ViewBag.Projects = await _context.Projects.FromSql("SELECT * FROM Project").ToListAsync();
             //var info = await _context.Projects.FromSql("SELECT * FROM Projects").ToListAsync();
 

@@ -70,7 +70,7 @@
                         @Html.DisplayFor(d => log.updateText)
                         @if (SignInManager.IsSignedIn(User))
                         {
-                            <a asp-action="EditUpdateEntry" asp-route-id="@Model.ID" asp-route-projectUpdateID="@log.projectUpdateID" asp-route-updateNumber="@i">Edit Entry</a>
+                            <a asp-action="EditUpdateEntry" asp-route-id="@Model.ID" asp-route-updateNumber="@i" asp-route-projectUpdateID="@log.projectUpdateID" >Edit Entry</a>
                             <a asp-action="DeleteUpdateEntry" asp-route-id="@Model.ID" asp-route-projectUpdateID="@log.projectUpdateID">Delete Entry</a>
                         }
                         
@@ -81,7 +81,7 @@
         </div>
        @if (SignInManager.IsSignedIn(User))
        {
-        <a asp-action="CreateUpdate" asp-route-id="@Model.ID" asp-route-updID="@i">Create Update</a>
+        <a asp-action="CreateUpdateEntry" asp-route-id="@Model.ID" asp-route-updateNumber="@i">Create Update Entry</a>
        }
         
     </div>
